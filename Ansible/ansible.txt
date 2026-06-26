@@ -1,0 +1,38 @@
+ANSIBLE:
+its a free and open-source tool.
+its an it engine that automates from server creation to deployment.
+It is also called a configuration management tool.
+
+configuration: cpu, memory and os
+management: update, delete, install ----
+
+ansible invented by Maichel dehaan in 2012.
+ansible is taken by RedHat
+We have both free and paid versions of ansible.
+it is platform independent.
+ansible works with YAML language.
+ansible dependency is Python.
+GUI for ansible is Ansible-Tower.
+
+HOW IT WORKS ?
+ARCHITECTURE:
+
+ANSIBLE SERVER: used to communicate with worker nodes and install pkgs, deployment
+WORKER NODES: takes commands from ansible server and works according to it
+PLAYBOOK: conatins the code which is used to perform action.
+INVENTORY: conatains info about worker nodes and group.
+
+
+
+SETUP:
+CREATE 5 SERVERS (1=ANSIBLE, 2=DEV, 2=TEST)
+ALL SERVERS:
+sudo -i
+hostnamectl set-hostname ansible/dev-1/dev-2/test-1/test-2
+sudo -i
+
+
+passwd root
+vim /etc/ssh/sshd_config  (38 uncomment, 63 no=yes)
+systemctl restart sshd
+systemctl status sshd

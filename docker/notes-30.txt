@@ -1,0 +1,451 @@
+DOCKER HUB:
+Its a central platfrom used to store docker images.
+image we create on host then we will push them to dockerhub.
+Once image is availabel on dockerhub we can use in any server.
+we use repos to store images.
+repo types: 1. public 2. private repo
+
+ACCOUNT:
+build a docker image with doker file.
+docker login: username and password
+
+docker tag image:v1 username/reponame
+docker push username/reponame
+
+Example: docker-compose.yml --->
+
+version: "3.8"
+services:
+  movie:
+    image: movies:v1
+    ports:
+      - 81:80
+  train:
+    image: train:v1
+    ports:
+      - 82:80
+  dth:
+    image: dth:v1
+    ports:
+      - 83:80
+  recharge:
+    image: rechager:v1
+    ports:
+      - 84:80
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DOCKER SWARM:
+
+High availability: deploying app on more than one server
+means using the cluster.
+
+docker swarm is a container orchestration tool.
+it is used to manage multiple containers on multiple nodes.
+each node will have a copy of single container.
+here we have manager and worker nodes.
+manager node will create containers and send to worker nodes.
+worker nodes will take the container and manage them.
+manager node communicates with worker node by using token.
+
+SETUP:
+1. create 3 servers (1=manager 2=worker) (all traffic is must)  --> aws server
+or 
+create 2 servers (1=manager 1=worker) (all traffic is must)  --> centos server
+
+yum install docker -y
+systemctl start docker
+systemctl status docker
+
+2. set the hostnames:
+hostnamectl set-hostname manager/worker-1/worker-2
+
+3. generate and copy token:
+manager node: docker swarm init
+copy the token to all worker nodes
+
+copy from manager and paste in worker-1 -->  docker swarm join --token xyz 192.168.x.107:2377
+note - cluster is ready
+
+manager -->
+docker build -t aman9039/pr-doc:latest
+docker run -itd --name cont1 aman9039/pr-doc:latest
+docker rm $(docker ps -a -q)
+
+SERVICES:
+its a way of exposing the application in docker.
+with services we can create multiple copies of same container.
+with services we can distribute the containers to all servers.
+
+docker service create --name movies --replicas=3 --publish 81:80 aman9039/train:latest
+
+check1 in browser --> manger ip:81 
+check1 in browser --> worker-1 ip:81 
+check1 in browser --> worker-2 ip:81  
+
+docker service ls		: to list services
+docker service ps train		: to list containers for train
+docker service inspect train	: to get complete info of train service
+docker service scale train=10	: to scale the services
+docker service scale train=6	: to scale the services
+docker service rollback train	: to go back to previous state
+docker service rm train		: to delete the train services
+
+SELF HEALING: automatically recreates container itself.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DOCKER PROJECT:
+
+
+yum install docker -y
+systemctl start docker
+systemctl status docker
+
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get install apache2 -y
+COPY index.html /var/www/html/
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+DOCKER FILE	: To create image by automation.
+DOCKER COMPOSE	: To create multiple containers on single server.
+DOCKER SWARM	: To create multiple containers on Multiple server.
+DOCKE STACK	: Docker swarm + Docker compose
+
+1. CREATE 3 SERVERS AND INSTALL DOCKER ON ALL OF THEM & CREATE CLUSTER OF IT
+
+yum install docker -y
+systemctl start docker
+systemctl status docker
+docker swarm init --advertise-addr 172.31.85.110
+docker node ls
+
+
+2. INSTALLING JENKINS (MASTER)
+
+script - jenkins.sh
+
+# Add Jenkins Repository
+wget -O /etc/yum.repos.d/jenkins.repo \
+https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+# Import Jenkins Key
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+# Install Java 17, Git, Maven
+dnf install -y java-17-openjdk java-17-openjdk-devel git maven
+
+# Install Jenkins
+dnf install -y jenkins
+
+# Start Jenkins
+systemctl daemon-reload
+systemctl enable jenkins
+systemctl start jenkins
+
+# Check Status
+systemctl status jenkins
+
+# Open Firewall
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --reload
+
+# Get Initial Password
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+3. CREATE CUSTOM IMAGES AND PUSH TO DOCKERHUB WITH TAGS
+
+DOCKER FILE:
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get install apache2 -y
+COPY index.html /var/www/html/
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+INDEX.HTML
+
+PIPELINE:
+
+pipeline {
+    agent any 
+    
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/RAHAMSHAIK007/dockernewproject.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'docker build -t $img .'
+            }
+        }
+        stage('tag') {
+            steps {
+                sh 'docker tag $img $repo'
+            }
+        }
+        stage('push') {
+            steps {
+                sh 'docker login -u  -p '
+                sh 'docker push $repo'
+            }
+        }
+    }
+}
+
+4. GIVE PERMISSIONS
+
+chmod 777 /var/run/docker.sock
+systemctl daemon-reload
+systemctl restart docker.service
+
+cd /var/lib/jenkins/workspace/docker-pipeline
+vi docker-compose.yml
+
+version: "3.8"
+services:
+  movies:
+    image: aman9039/paymovies:latest
+    ports: 81:80
+    deploy:
+      replicas: 3
+  train:
+    image: aman9039/paytrain:latest
+    ports: 82:80
+    deploy:
+      replicas: 3
+  dth:
+    image: aman9039/paydth:latest
+    ports: 83:80
+    deploy:
+      replicas: 3
+  recharge:
+    image: aman9039/payrecharge:latest
+    ports: 84:80
+    deploy:
+      replicas: 3
+ 
+ -- update the github docker-compose.yml file and commit file aman9039/dockernewproject
+
+docker-pipeline:
+
+pipeline {
+    agent any
+    
+    stages {
+        stage ('checkout') {
+            steps {
+                git 'https://github.com/aman9039/dockernewproject.git'
+            }
+        }
+        stage ('build') {
+            steps {
+                sh 'docker build -t $img .'
+            }
+        }
+        stage ('tag'){
+            steps {
+                sh 'docker tag $img $repo'
+            }
+        }
+        stage ('push'){
+            steps {
+                 sh 'docker login -u aman9039 -p $password'
+                 sh 'docker push $repo'
+            }
+        }
+    }
+}
+
+
+deploy-pipeline :
+
+pipeline {
+    agent any
+    stages {
+        stage ('checkout') {
+            steps {
+               git 'https://github.com/aman9039/dockernewproject.git' 
+            }
+        }
+        stage ('deploy') {
+            steps {
+                sh 'docker stack deploy -c docker-compose.yml paytm'
+            }
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. WRITE COMPOSE FILE AND PUSH TO GITHUB
+
+version: '3.8'
+services:
+  devops:
+    image: rahamshaik/devopsreponit:latest
+    ports:
+      - "80:80"
+    volumes:
+      - "devopsvol"
+    deploy:
+      replicas: 3
+
+  aws:
+    image: rahamshaik/awsreponit:latest
+    ports:
+      - "81:80"
+    volumes:
+      - "awsvol"
+    deploy:
+      replicas: 3
+
+  datascience:
+    image: rahamshaik/datasciencereponit:latest
+    ports:
+      - "82:80"
+    volumes:
+      - "datasciencevol"
+    deploy:
+      replicas: 3
+
+  azure:
+    image: rahamshaik/azurereponit:latest
+    ports:
+      - "83:80"
+    volumes:
+      - "azurevol"
+    deploy:
+      replicas: 3
+
+Q. Do you know Portainer?
+"Yes, I have used Portainer for Docker and Docker Swarm management, container monitoring, logs, stack deployment, and troubleshooting. However, for production deployments I prefer CI/CD pipelines and Infrastructure as Code approaches."
+
+PORTAINER:
+it is a container organizer, designed to make tasks easier, whether they are clustered or not. 
+abel to connect multiple clusters, access the containers, migrate stacks between clusters
+it is not a testing environment mainly used for production routines in large companies.
+Portainer consists of two elements, the Portainer Server and the Portainer Agent. 
+Both elements run as lightweight Docker containers on a Docker engine
+
+Download Latest Portainer Swarm Stack
+curl -L https://downloads.portainer.io/portainer-agent-stack.yml -o portainer-agent-stack.yml
+
+
+version: "3.8"
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    deploy:
+      replicas: 1
+
+volumes:
+  portainer_data:
+
+command: docker stack deploy -c portainer-agent-stack.yml portainer
+server_ip:9000
+user: admin
+password : admin9039xxxxx9
+
+
+when you delete docker stack rm stack_name  also delete containers and services--> 
+docker stack rm stack_name
+docker service ls
+docker stack ps stack_name
+docker stack ls
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Docker Networking
+
+Docker Networking is used for communication:
+
+Container ↔ Container
+Container ↔ Host
+Container ↔ Internet
+
+Types of Docker Networks
+
+1. Bridge Network (Default) : Docker automatically attaches the container to the default bridge network.
+# docker network ls
+# docker network inspect bridge
+
+2. Host Network :
+Host Port 8080 → Container Port 80
+
+Host Network ↔ Container
+No port mapping required.
+Used when high performance is needed.
+
+3. None Network :
+No networking at all.
+docker run -d --network none nginx
+
+Container gets:
+No IP
+No Internet
+No Communication
+
+Used for highly isolated workloads.
+
+4. Custom Bridge Network :
+Most commonly used in projects.
+
+Create:
+docker network create paytm-net
+
+Check:
+docker network ls
+
+Run containers:
+docker run -dit --name movie --network paytm-net nginx
+docker run -dit --name train --network paytm-net nginx
+
+Now containers can communicate by name:
+docker exec -it movie ping train
+This is much better than using IP addresses.
+
+docker network ls
+docker network create net_name
+docker network inspect net_name
+docker network connect net_name cont1
+docker network disconnect net_name cont1
+
+Docker networks are used to make a communication between the multiple containers that are running on same or different docker hosts. We have different types of docker networks.
+Bridge Network
+Host Network
+None network
+Overlay network
+
+BRIDGE NETWORK: It is a default network that container will communicate with each other within the same host.
+
+HOST NETWORK: When you Want your container IP and ec2 instance IP same then you use host network
+
+NONE NETWORK: When you don’t Want The container to get exposed to the world, we use none network. It will not provide any network to our container.
+
+OVERLAY NETWORK: Used to communicate containers with each other across the multiple docker hosts.
+
+
+To create a network: docker network create network_name
+To see the list: docker network ls
+To delete a network: docker network rm network_name
+To inspect: docker network inspect network_name
+To connect a container to the network: docker network connect network_name container_id/name
+apt install iputils-ping -y : command to install ping checks
+To disconnect from the container: docker network disconnect network_name container_name
+To prune: docker network prune
+
+
+RESOURCE MANAGEMENT:
+continers are going to use host resources. (cpu, mem and ram)
+we need to limit that resoure utilization.
+by default containers are not having limts.
+
+
+docker run -itd --name cont3 --cpus="0.5" --memory="500mb" ubuntu 
+docker inspect cont3
+docker stats
+docker top cont3

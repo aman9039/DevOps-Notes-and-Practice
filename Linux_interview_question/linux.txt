@@ -1,0 +1,28 @@
+1. Server is Down. What will you do?
+answer:
+ping <server-ip> --> check network --> check SSH service --> check logs using (journalctl -xe) --> restart services
+
+Short Answer
+First I check network connectivity using ping. Then I check SSH service status and server logs. Based on the error, I troubleshoot and restore the service.
+----------------------------------------------------------------------------------------------------------------
+2. Disk Space is 100% Full. What will you do?
+answer: 
+check disk usage (df -h) --> check directory(du -sh /*) --> Find large files(find / -type f -size +500M) --> truncate -s 0 /var/log/messages
+command: df -h --> du -sh /* --> find / -type f -size +500M --> find --> delete content
+
+Short Answer
+I will check disk utilization using df -h, identify large files using du and find commands, remove unnecessary files, and free disk space.
+----------------------------------------------------------------------------------------------------------------
+3. Website is Not Accessible?
+answer:
+check web server --> httpd & nginx status (systemctl) --> Check port listening (ss -tunlp & netstat -tunlp) --> Check firewall --> Check logs (tail,journalctl -xe,/var/log)
+
+Short Answer
+I will check web service status, listening ports, firewall rules, and application logs to identify the issue.
+----------------------------------------------------------------------------------------------------------------
+4. User Cannot Login to Linux Server?
+answer:
+check user exists(id username) --> Check password expiry (chage -l username) --> Check account lock status (passwd -S username) --> Unlock account if needed (passwd -u username)
+
+Short Answer
+I will verify user account, password status, and account lock information, then resolve the issue accordingly.

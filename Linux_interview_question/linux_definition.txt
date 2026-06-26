@@ -1,0 +1,88 @@
+1. What is sshd?
+answer: SSHD is the SSH server service in Linux. It listens on port 22 and allows users to securely connect and manage the server remotely."
+----------------------------------------------------------------------------------------------------------------
+2. Why do we use it journalctl -xe?
+answer: journalctl -xe is a Linux command used to check recent system logs and errors. It helps in troubleshooting failed services, permission issues, network problems, and other system-related errors.
+
+--> What to check in the output?
+Look for:
+ERROR messages
+FAILED services
+Permission denied
+Disk full / No space left
+Network connection issues
+Service startup failures
+----------------------------------------------------------------------------------------------------------------
+
+3. Why use it df -h ?
+To check disk space usage of filesystems/partitions.
+df -h is used to check filesystem disk usage in a human-readable format like GB and MB.
+----------------------------------------------------------------------------------------------------------------
+
+4. why use it du -sh /* ?
+To find which directory is consuming the most disk space,the size of each directory under /.
+----------------------------------------------------------------------------------------------------------------
+
+5. why use truncate -s 0 /var/log/messages ?
+This command empties the log file without deleting the file itself.
+
+truncate -s 0 /var/log/messages
+Breakdown
+truncate → Reduce or extend file size.
+-s 0 → Set file size to 0 bytes.
+/var/log/messages → System log file.
+----------------------------------------------------------------------------------------------------------------
+
+6. Why not use rm and use truncate ?
+rm /var/log/messages
+❌ Deletes the file completely.
+Some services may continue writing to the old file handle or expect the file to exist.
+truncate -s 0 /var/log/messages
+
+✅ Keeps the file, permissions, ownership, and logging continues normally.
+----------------------------------------------------------------------------------------------------------------
+7. What is truncate in Linux?
+truncate is a command used to change the size of a file.
+
+It can:
+Make a file empty (0 bytes)
+Reduce the file size
+Increase the file size
+
+Example
+truncate -s 0 test.log
+Before:
+-rw-r--r-- 1 user user 500M test.log
+After:
+-rw-r--r-- 1 user user 0 test.log
+
+The file still exists, but all its contents are removed.
+
+Why use truncate?
+Clear large log files
+Free disk space
+Keep file permissions and ownership unchanged
+Avoid deleting files that applications are currently using
+
+Interview Answer
+"truncate is a Linux command used to change the size of a file. It is commonly used to clear large log files by setting their size to 0 bytes without deleting the file."
+
+----------------------------------------------------------------------------------------------------------------
+8. How to Extend File Size Using truncate?
+Create a 100 MB File
+command: truncate -s 100M /index.txt
+         ls -lh index.txt
+         -rw-r--r-- 1 user user 100M index.txt
+
+Why Use This?
+
+#Linux admins often create dummy files for:
+ Testing disk space alerts
+ Testing monitoring tools
+ Practicing disk-full scenarios
+ Testing backups
+Ex- truncate -s 5G dummy.log
+
+Interview Answer
+We can use truncate -s <size> filename to increase a file's size. It is commonly used to create test files or simulate disk space usage. The file size changes immediately without writing actual data
+----------------------------------------------------------------------------------------------------------------
