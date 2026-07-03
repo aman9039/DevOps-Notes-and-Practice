@@ -1,0 +1,191 @@
+#!/bin/bash
+This is called the shebang("Run this script using the Bash interpreter")
+It is called a shebang. It tells Linux to execute the script using the Bash shell.
+
+</> This step teaches three very important Bash concepts:
+✅ Variables
+✅ read
+✅ case
+These are used in almost every Bash automation script.
+
+> Variables: A variable is like a container (box) that stores data.
+  ex: name="Aman"
+
+> read: read is a Bash built-in command.
+Its job is to take input from the keyboard and store it in a variable.
+ex: read variable_name or name
+
+> case: case is used when you have multiple choices.
+ex: case $choice in
+    1)
+        echo "Health"
+        ;;
+    2)
+        echo "Disk"
+        ;;
+    *)
+        echo "Invalid Choice"
+        ;;
+esac
+
+;; means: "This option is finished. Stop here."
+Without ;;, the case statement won't work correctly.
+
+*)
+    echo "Invalid Choice"
+    ;;
+
+This is the default case.
+If the user enters anything other than 1–5, this block runs
+------------------------------------------------------------------------------------------------------------------------------------------
+Function:
+Q. What is a function in Bash?
+Answer: A function is a reusable block of code that performs a specific task. It helps organize scripts and avoids repeating the same code.
+Functions make scripts modular, easier to read, maintain, debug, and reuse.
+
+A function groups related commands into one reusable block.
+
+Think of it like this:
+
+TV Remote
+
+Power Button
+Volume Button
+Channel Button
+
+↓
+
+Each button performs one specific task.
+
+> Suppose your script has:
+Health Check
+Disk Check
+Memory Check
+CPU Check
+Network Check
+
+> Instead of writing everything in one place, create one function for each task.
+health_check()
+disk_check()
+memory_check()
+cpu_check()
+network_check()
+------------------------------------------------------------------------------------------------------------------------------------------
+# health_check
+ex: 
+
+# -------------------------
+# Function: Health Check
+# -------------------------
+health_check() {
+    echo
+    echo "========== HEALTH CHECK =========="
+    echo "Hostname      : $(hostname)"
+    echo "Current User  : $(whoami)"
+    echo "Date          : $(date)"
+    echo "Uptime        : $(uptime -p)"
+    echo "Kernel Version: $(uname -r)"
+    echo "OS            : $(grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d '"')"
+    echo "IP Address    : $(hostname -I)"
+    echo "=================================="
+    echo
+}
+
+output:
+command : bash toolkit.sh 
+
+========== HEALTH CHECK ==========
+Hostname      : Ubuntu
+Current User  : root
+Date          : Wed Jul  1 07:08:05 AM UTC 2026
+Uptime        : up 36 minutes
+Kernel Version: 6.17.0-35-generic
+OS            : Ubuntu 24.04.4 LTS
+IP Address    : 192.168.0.109 192.168.49.1 172.17.0.1 
+==================================
+
+commands:
+uptime -p : Shows readable uptime.
+uname -r : Shows kernel version.
+/etc/os-release : Contains OS information.
+hostname -I : Shows the server's IP addresses.
+------------------------------------------------------------------------------------------------------------------------------------------
+# disk_check
+
+disk_check() {
+
+    echo
+    echo "========== DISK USAGE =========="
+
+    df -h
+
+    echo
+    echo "========== TOP DIRECTORIES =========="
+
+    du -sh /* 2>/dev/null
+
+    echo
+    echo "========== FILES LARGER THAN 500 MB =========="
+
+    find / -type f -size +500M 2>/dev/null
+
+    echo
+
+    disk_usage=$(df -h / | awk 'NR==2 {print $5}' | tr -d '%')
+
+    echo "Root Disk Usage : ${disk_usage}%"
+
+    if [ "$disk_usage" -ge 80 ]
+    then
+        echo "WARNING! Disk usage is above 80%."
+    else
+        echo "Disk usage is normal."
+    fi
+
+    echo
+}
+
+# Why 2>/dev/null?
+Some directories can only be accessed by root.
+Without it, you'll see many errors like:
+Permission denied
+2>/dev/null hides those error messages, making the output cleaner.
+------------------------------------------------------------------------------------------------------------------------------------------
+service_check function
+
+check_service() {
+
+
+service=$1
+
+sudo systemctl restart "$service"
+
+status=$(systemctl is-active "$service")
+
+if [ "$status" = "active" ]
+then
+    echo "$service restarted successfully."
+else
+    echo "Failed to restart $service."
+fi
+
+}
+
+service_check() {
+
+
+  echo
+    echo "========== SERVICE STATUS =========="
+    echo
+    echo "Checking SSH Service..."
+
+    check_service sshd
+    check_service docker
+    check_service jenkins
+
+
+    echo
+}
+
+
+# $1 is the first argument passed to a function or script. It allows the same function to work with different inputs.

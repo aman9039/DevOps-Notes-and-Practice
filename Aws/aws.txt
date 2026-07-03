@@ -1,0 +1,55 @@
+1. What is Elastic Load Balancer (ELB)?
+AWS Elastic Load Balancer automatically distributes incoming traffic across multiple EC2 instances. It improves high availability, scalability, and fault tolerance.
+----------------------------------------------------------------------------------------------------------------
+2. Why do we use ELB?
+Without ELB
+1000 Users
+      |
+      |
+     EC2
+One server handles everything.
+
+Problems:
+High CPU
+Server crash
+Website down
+
+With ELB
+1000 Users
+      |
+     ELB
+   /   |   \
+EC2  EC2  EC2
+
+Traffic is shared.
+
+Benefits
+High availability
+Auto scaling support
+No single point of failure
+Better performance
+
+flow --->
+step-1
+Basic configuration
+Name: web-elb
+Scheme: Internet-facing
+IP address type: IPv4
+
+step-2
+Network mapping 
+VPC: vpc-06754aea2d9031e10
+Public IPv4 IPAM pool: -
+Availability Zones and subnets:
+ap-south-1b
+subnet-0b374a65f717514be
+
+step-3
+Security groups 
+default
+sg-099e17de8305c0a27
+
+step-4
+Listeners and routing
+HTTP:80 | Forward to target group
+----------------------------------------------------------------------------------------------------------------

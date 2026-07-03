@@ -1,6 +1,6 @@
 1. Server is Down. What will you do?
 answer:
-ping <server-ip> --> check network --> check SSH service --> check logs using (journalctl -xe) --> restart services
+check network --> ping <server-ip> --> check SSH service --> check logs using (journalctl -xe) --> restart services
 
 Short Answer
 First I check network connectivity using ping. Then I check SSH service status and server logs. Based on the error, I troubleshoot and restore the service.
@@ -26,3 +26,126 @@ check user exists(id username) --> Check password expiry (chage -l username) -->
 
 Short Answer
 I will verify user account, password status, and account lock information, then resolve the issue accordingly.
+
+Change a User Password : sudo passwd username
+grep username /etc/passwd
+change /bin/bash to /sbin/nologin <=> /sbin/nologin to /bin/bash:(User cannot login change this)
+sudo usermod -s /bin/bash or /sbin/nologin username
+----------------------------------------------------------------------------------------------------------------
+5. CPU Usage is Very High?
+Check running processes(top or htop) --> Identify high CPU consuming process(ps aux --sort=-%cpu) --> Restart service if required --> If needed:kill PID
+
+ps = Process Status (It shows the processes running in the current terminal (shell))
+ps aux = I use ps aux to see all running processes along with details like user, CPU usage, memory usage, and command.
+a → Show processes of all users.
+u → Show detailed information (user, CPU, memory).
+x → Show processes without a terminal (background services).
+
+I use ps aux --sort=-%cpu to find the process using the highest CPU. It is useful when troubleshooting high CPU usage
+
+Short Answer
+I will identify the process consuming high CPU using top or ps commands and then troubleshoot that service.
+----------------------------------------------------------------------------------------------------------------
+6. Memory Usage is High ?
+Check memory(free -h) --> Check processes(top or htop) --> Check swap usage(swapon --show) --> ps aux --sort=-%cpu or %mem
+
+I will analyze memory utilization using free and top commands, identify memory-consuming processes, and take corrective action.
+----------------------------------------------------------------------------------------------------------------
+7. SSH Connection Refused or  A Service is Not Starting ?
+Check SSH service(sshd) --> Check port(ss -tulnp | grep 22 or netstat -tunlp) --> Check firewall --> log(journalctl -xe)
+
+I will verify SSH service, port availability, and firewall configuration.
+----------------------------------------------------------------------------------------------------------------
+8.File Deleted Accidentally ?
+First I check backups or snapshots and restore the deleted file from the latest available backup.
+----------------------------------------------------------------------------------------------------------------
+8.Service is restarting continuously?
+systemctl status nginx --> journalctl -u nginx --> nginx -t
+I will check the service status, review logs, verify configuration files, and identify why the service is crashing.
+----------------------------------------------------------------------------------------------------------------
+9.Application works locally but not remotely.
+I will verify that the application is listening on the correct IP and port, check firewall rules, and ensure the service is bound to 0.0.0.0 if remote access is required.
+ss -tunlp
+firewall-cmd --list-all
+----------------------------------------------------------------------------------------------------------------
+10.DNS is not resolving ?
+ping <IP> → Check basic network connectivity.
+cat /etc/resolv.conf → Verify the DNS server configuration.
+nslookup google.com → Confirm the domain resolves.
+dig google.com → Get detailed DNS information.
+hostname -i → Verify the server's IP addresses.
+
+/etc/resolv.conf : It stores the DNS server configuration.
+nslookup google.com : nslookup checks whether DNS is working. It sends a DNS query to the configured DNS server and returns the IP address for a domain name.
+dig : Domain Information Groper (It gives more detailed DNS information than nslookup).
+----------------------------------------------------------------------------------------------------------------
+11.Cron job is not executing ?
+cron : A cron job is a scheduled task in Linux.
+It runs a command or script automatically at a specific time or date.
+
+Interview Answer 
+"A cron job is used to automate tasks in Linux. It runs commands or scripts automatically at scheduled times, such as every day, every hour, or every week."
+
+* * * * * command
+│ │ │ │ │
+│ │ │ │ └── Day of Week (0-7)
+│ │ │ └──── Month (1-12)
+│ │ └────── Day of Month (1-31)
+│ └──────── Hour (0-23)
+└────────── Minute (0-59)
+
+commands :
+> systemctl status/start/stop crond : Check Cron Service,start,stop
+> systemctl enable crond : Enable it at boot
+> crontab -e : Edit Cron Jobs(This opens the cron editor)
+> crontab -l : view cron job
+> crontab -r : Remove Cron Jobs
+----------------------------------------------------------------------------------------------------------------
+# Why do we use Cron Jobs?
+Linux administrators use cron jobs to automate repetitive tasks.
+Examples:
+
+Daily backup
+Delete old log files
+Restart a service
+Run monitoring scripts
+Send reports
+Database backup
+
+Where Are Cron Jobs Stored 
+User cron jobs : /var/spool/cron/
+System cron file : /etc/crontab
+----------------------------------------------------------------------------------------------------------------
+12 Server rebooted unexpectedly ?
+last reboot
+journalctl -b -1
+dmesg
+----------------------------------------------------------------------------------------------------------------
+13. Log file is growing rapidly ?
+du -sh /var/log
+cat /etc/logrotate.conf
+
+I will identify which process is generating logs, check log rotation settings, and rotate or clean old logs if appropriate.
+----------------------------------------------------------------------------------------------------------------
+14.Swap memory is heavily used ?
+free -h
+top
+----------------------------------------------------------------------------------------------------------------
+15.Filesystem becomes read-only ?
+dmesg -> mount -> fsck
+dmesg : dmesg stands for Display Message (dmesg displays Linux kernel messages. I use it to troubleshoot hardware, disk, USB, driver, and boot-related issues).
+command : dmesg | tail
+
+mount : mount is used to attach a filesystem to a directory so Linux can access it. I use it when adding new disks, USB drives, or network storage.
+
+fsck : fsck stands for File System Check.It checks and repairs filesystem errors.
+----------------------------------------------------------------------------------------------------------------
+16.After a power failure, the server is not booting. What will you do?"
+Boot into rescue or recovery mode.
+Identify the filesystem:
+lsblk
+Run:
+fsck /dev/sda2
+Reboot the server.
+Quick Revision
+----------------------------------------------------------------------------------------------------------------
