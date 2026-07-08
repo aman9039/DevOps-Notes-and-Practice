@@ -1,0 +1,127 @@
+Terraform:
+=========
+
+TERRAFORM : Infrastructure as code
+
+                          = > AWS
+main.tf ==>  Terraform = = => AZURE
+                          = > GOOGLE CLOUD
+
+4 stages:
+
+1) Write : code in HCL
+   . define resources in code e.g main.tf,vpc.tf
+2) Initialize : terraform init
+   . download provider
+3) Plan : terraform Plan
+   . terraform creates an execution plan (preview of changes)
+4) Apply : terraform apply
+   . provision Infrastructure
+
+                     ------> EC2 Instance
+                     |
+TERRAFORM ---> AWS - |   
+                     |
+                      ------> S3 Bucket
+
+
+How Terraform Works:
+===================
+
+Remember only this picture:
+
+Write Code
+   ↓
+terraform init
+   ↓
+terraform plan
+   ↓
+terraform apply
+   ↓
+Infrastructure Created
+
+Only three commands.
+
+Step 1: terraform init
+======
+
+Imagine:
+Installing Terraform plugins.
+
+Ex.
+If using AWS, Terraform downloads AWS plugin. Think: init = setup
+
+Step 2: terraform plan
+======
+
+Terraform asks:
+"Boss, this is what I am going to create."
+
+Example:
++ create server
++ create database
++ create load balancer
+
+Nothing is created yet.
+
+Think:
+plan = preview
+
+Step 3: terraform apply
+======
+
+Terraform says:
+"Okay, now I will create everything."
+
+Think:
+apply = execute
+
+Bonus Command: terraform destroy
+=============
+Deletes everything.
+
+Think:
+destroy = nuclear button
+
+Very useful in testing environments.
+
+Q.What is Terraform?
+Answer: Terraform is an Infrastructure as Code tool developed by HashiCorp. It is used to create, manage,and provision infrastructure using code instead of manually creating resources from the cloud console.
+
+INIT → PLAN → APPLY → DESTROY
+INIT (Buy tools) --> PLAN (Create blueprint) --> APPLY (Build house) --> DESTROY (Demolish house)
+
+Work flow :
+=========
+
+      Developer
+         ↓
+      Git Push
+         ↓
+      GitHub Repository
+         ↓ 
+      GitHub detects new code
+         ↓
+      Start Pipeline (CI)
+         ↓
+      Application Files
+         ↓
+      Docker Machine
+         ↓
+      Docker Image Created
+         ↓
+      Cotainer Registry
+         ↓
+      AWS EC2 Servers
+        ↓
+      Kubernetes Cluster
+        ↓
+      Pods Running
+        ↓
+      3 Containers Running
+
+
+Note:
+AWS is the land.
+Kubernetes is the apartment building.
+Containers are families living inside apartments.

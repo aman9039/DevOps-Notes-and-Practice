@@ -189,3 +189,70 @@ service_check() {
 
 
 # $1 is the first argument passed to a function or script. It allows the same function to work with different inputs.
+----------------------------------------------------------------------------------------------------------------
+network_check
+
+network_check() {
+
+    echo
+    echo "========== NETWORK INFORMATION =========="
+    echo
+
+    echo "Server IP"
+
+    hostname -I
+
+    echo
+
+    echo "Interfaces"
+
+    ip -br addr
+
+    echo
+
+    echo "Internet Connectivity"
+
+    if ping -c 2 8.8.8.8 >/dev/null 2>&1
+    then
+        echo "Internet : Connected"
+    else
+        echo "Internet : Not Reachable"
+    fi
+
+    echo
+
+    echo "DNS"
+
+    if nslookup google.com >/dev/null 2>&1
+    then
+        echo "DNS : Working"
+    else
+        echo "DNS : Failed"
+    fi
+
+    echo
+
+    echo "Listening Ports"
+
+    ss -tuln | grep -E "22|80|443|8080|9090|9100|3000"
+
+    echo
+
+    echo "Gateway"
+
+    ip route | grep default
+
+    echo
+
+    echo "DNS Server"
+
+    grep nameserver /etc/resolv.conf
+
+    echo
+}
+
+
+
+Why do we use >/dev/null 2>&1 in Bash scripts?
+Answer:
+It suppresses both standard output and error output. This keeps the terminal clean when the script only needs the command's success or failure (exit status), which can then be checked using $? or directly in an if statement.

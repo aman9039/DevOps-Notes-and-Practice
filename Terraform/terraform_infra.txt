@@ -1,0 +1,85 @@
+Where does Terraform come in?
+The answer is:
+Terraform comes BEFORE Kubernetes deployment.
+
+Visualize this complete picture:
+
+Terraform
+    ↓
+Creates AWS Infrastructure
+    ↓
+EC2 Servers
+VPC
+Subnets
+Security Groups
+Load Balancer
+EKS Cluster
+EBS Volumes
+IAM Roles
+    ↓
+Infrastructure Ready
+    ↓
+Developer pushes code
+    ↓
+GitHub
+    ↓
+CI Pipeline
+    ↓
+Docker Image Build
+    ↓
+Push Image to ECR
+    ↓
+CD Pipeline
+    ↓
+Kubernetes Deploys Application
+    ↓
+Users Access Application
+
+----------------------------------------------------------------------------------------------------------------
+Visualize the real flow
+=======================
+
+Infrastructure Layer
+====================
+
+Created by Terraform:
+
+AWS Account
+    ↓
+Terraform
+    ↓
+VPC
+Subnets
+Security Groups
+IAM
+EKS Cluster
+Load Balancer
+Storage
+Application Layer
+
+----------------------------------------------------------------------------------------------------------------
+Managed by Kubernetes:
+======================
+
+Kubernetes
+    ↓
+Pods
+Deployments
+Services
+Ingress
+ConfigMaps
+Secrets
+Code Layer
+--------------------------------------------------------------------------------------------------------------
+Managed by CI/CD:
+=================
+
+GitHub
+ ↓
+Build
+ ↓
+Test
+ ↓
+Docker Image
+ ↓
+Deploy
