@@ -146,3 +146,61 @@ journalctl -u nginx
 journalctl -u docker
 journalctl -u jenkins
 journalctl -u sshd 
+----------------------------------------------------------------------------------------------------
+10.how to use find command in linux , explain?
+
+find WHERE WHAT ACTION
+or
+find [location] [condition] [do something]
+
+Note: Every find command follows this pattern.
+
+Ex.
+find /etc -name passwd
+
+Break it:
+WHERE  -> /etc
+WHAT   -> file name is passwd
+WHAT ELSE --> -mtime +7
+ACTION -> show result
+--> Go inside /etc, find passwd, and show it.
+----------------------------------------------------------------------------------------------------
+11. How to use awk in linux explain?
+awk "WHICH LINE -> WHICH COLUMN -> WHAT ACTION"
+or
+awk 'condition { action }' file
+
+Think of awk as:
+A tool for reading a file line by line and working with columns.
+
+Ex. awk '$3 > 50000 {print $1,$3}' employees.txt
+
+Break it:
+WHICH LINE   -> salary greater than 50000
+WHICH COLUMN -> name and salary
+ACTION       -> print
+
+Columns are separated by :.
+Tell awk to use ::
+
+awk -F: '{print $1}' /etc/passwd | head -3
+
+Output:
+root
+daemon
+
+Why -F: ?
+-F = Field Separator
+:  = Colon is separator
+
+Default separator is space.
+
+The only things to remember
+Item	Meaning
+$0	Entire line
+$1	First column
+$2	Second column
+$NF	Last column
+NR	Line number
+NF	Number of columns
+-F	Separator

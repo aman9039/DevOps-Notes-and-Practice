@@ -125,3 +125,43 @@ Note:
 AWS is the land.
 Kubernetes is the apartment building.
 Containers are families living inside apartments.
+
+Terraform Core Concepts
+=======================
+
+There are only a few concepts.
+Everything else is built on top of them.
+
+1. Provider
+
+Question:
+Which cloud should Terraform talk to?
+Examples: AWS,Azure,GCP,Kubernetes,VMware
+
+Terraform --> Translator ---> AWS API
+** Provider = Cloud Translator
+
+2. Resource
+
+Question:
+What should Terraform create?
+
+Examples:
+EC2,VPC,Security Group,S3 Bucket,EKS Cluster
+** Resource = Something to create.
+
+3. Arguments
+Resources need details.
+
+Example:
+
+Server Size?
+Operating System?
+Subnet?
+Security Group?
+
+These details are arguments.
+
+Example:
+instance_type = "t2.micro"
+** Arguments = Configuration details.

@@ -1,0 +1,16 @@
+Interview Tip
+
+For every scenario, don't just memorize commands. Practice answering in this format:
+
+Understand the issue
+Check service status
+Check logs
+Verify configuration
+Fix the root cause
+Test the application
+Monitor after the fix
+
+This troubleshooting flow sounds natural in interviews and works for Linux, AWS, Docker, Kubernetes, and DevOps questions.
+----------------------------------------------------------------------------------------------------
+
+Note: mkdir -p ~/practice/{backup,config}

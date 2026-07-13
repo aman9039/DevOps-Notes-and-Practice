@@ -1,0 +1,25 @@
+The easiest way to learn coding
+
+Do not learn syntax first.
+Learn this order:
+
+Problem
+ ↓
+Steps to solve problem
+ ↓
+Convert steps to commands
+ ↓
+Convert commands to code
+
+
+Coding Memory Trick
+===================
+
+Never ask:
+How do I write code?
+
+Ask:
+What steps would a human do manually?
+
+Then automate those steps.
+That is coding.
