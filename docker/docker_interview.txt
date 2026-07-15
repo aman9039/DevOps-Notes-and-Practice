@@ -1,0 +1,8 @@
+1.Does Docker have its own OS?
+No, Docker containers do not have their own OS. They share the host OS kernel.
+
+VM = Full OS + Application
+Docker = Application + Dependencies (Host OS kernel shared)
+
+2.Why is Docker faster than VM?
+Docker is faster because it does not need to boot a complete operating system for each container. Containers share the host OS kernel, which reduces startup time and resource usage.

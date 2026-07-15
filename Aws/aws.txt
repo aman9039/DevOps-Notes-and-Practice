@@ -184,6 +184,183 @@ EC2-2 Healthy
 EC2-3 Crashed
 
 Without Load Balancer:
+=====================
 Users -> EC2-3
 Website becomes unavailable.
 
+With Load Balancer:
+==================
+ELB continuously checks server health.
+
+Example:
+Every 30 seconds ELB sends:
+
+GET /
+If server returns: HTTP 200 OK
+instance is healthy.
+
+If server returns:
+500,502,503,Timeout,Connection refused
+
+instance becomes unhealthy.
+ELB automatically removes failed server.
+
+Before:
+ELB
+ |
+ |-- EC2-1
+ |-- EC2-2
+ |-- EC2-3
+
+After failure:
+ELB
+ |
+ |-- EC2-1
+ |-- EC2-2
+
+Users continue using application without noticing.
+
+When EC2-3 becomes healthy again:
+systemctl start nginx
+Health checks pass.
+ELB automatically adds it back.
+----------------------------------------------------------------------------------------------------
+4. How do you troubleshoot ELB issues?
+I check application status, listening ports, logs, security groups, target group health checks, listener rules, and target registration.
+
+Check 1: Is application running?
+systemctl status nginx/httpd/myapp
+
+Check 2: Is application listening on correct port?
+ss -tunlp or netstat -tunlp
+
+Example:
+LISTEN 0 511 0.0.0.0:80
+
+Good.
+If application listens on: 8080
+but target group checks: 80
+health check fails.
+
+Check 3: Test application locally
+curl localhost or curl localhost:80
+Expected:
+HTTP/1.1 200 OK
+
+Check 4: Check logs
+Nginx:
+tail -f /var/log/nginx/error.log
+
+Apache:
+tail -f /var/log/httpd/error_log
+
+System logs:
+journalctl -xe
+
+Check 5: Security Group
+Load Balancer SG:
+Allow: 80,443
+
+EC2 Security Group:
+Allow: 80 from Load Balancer Security Group
+
+Many candidates forget this.
+
+Check 6: Health Check Path
+Wrong: /health
+Application only serves: /
+Result: 404 Not Found
+
+Target becomes unhealthy.
+
+Check 7: Listener Rule
+Verify:
+
+80 -> Target Group
+443 -> Target Group
+
+Check 8: Target Registration
+Verify instance exists in target group.
+----------------------------------------------------------------------------------------------------
+5. How does ELB integrate with Auto Scaling?
+Auto Scaling automatically adds newly created EC2 instances to the target group and removes terminated instances. ELB starts sending traffic only after health checks pass.
+
+Suppose you have:
+
+2 EC2 instances
+
+Traffic suddenly increases.
+CPU becomes:
+85%,90%,95%
+
+Auto Scaling policy says:
+If CPU > 70%
+Launch new instance
+
+AWS creates: EC2-3
+Auto Scaling automatically registers EC2-3 into Target Group.
+
+Now traffic becomes:
+ELB
+ |
+ |-- EC2-1
+ |-- EC2-2
+ |-- EC2-3
+
+No manual work required.
+Traffic decreases.
+CPU becomes: 10%,15%
+
+Auto Scaling policy says:
+If CPU < 20%
+Terminate one instance
+Auto Scaling removes EC2-3.
+
+ELB automatically stops sending traffic to it.
+---------------------------------------------------------------------------------------------------
+6. How does ELB work with Multiple Availability Zones?
+ELB can distribute traffic across multiple Availability Zones. If one AZ fails, traffic automatically goes to healthy instances in another AZ, ensuring high availability and fault tolerance.
+
+Good design:
+
+ap-south-1a
+ |
+ |-- EC2-1
+
+ap-south-1b
+ |
+ |-- EC2-2
+
+ELB sits above both AZs.
+
+             ELB
+            /   \
+         AZ-1   AZ-2
+         EC2-1  EC2-2
+
+If AZ-1 fails:
+ELB
+ |
+ |-- EC2-2
+
+Application continues working.
+
+This is called High Availability.
+
+Complete Production Architecture
+================================
+Users
+  ↓
+Route53 DNS
+  ↓
+Application Load Balancer
+  ↓
+Target Group
+  ↓
+Auto Scaling Group
+  ├── EC2 in AZ-1a
+  ├── EC2 in AZ-1b
+  └── EC2 in AZ-1c
+  ↓
+RDS Database
+----------------------------------------------------------------------------------------------------

@@ -1,0 +1,140 @@
+Q: Why do you want to become a DevOps Engineer?
+I enjoy working with Linux, automation, cloud technologies, and solving infrastructure problems, so I chose DevOps as my career path.
+
+Linux
+
+Q: What is Linux?
+Linux is an open-source operating system.
+
+Q: What is a process?
+A process is a running instance of a program.
+
+Q: What is a daemon process?
+A daemon is a background process that runs continuously.
+
+Q: What is SSH?
+SSH is used to securely connect to a remote server.
+
+Q: What is the difference between cp and mv?
+cp copies files, while mv moves or renames files
+
+Networking
+
+Q: What is an IP address?
+An IP address identifies a device on a network.
+
+Q: What is DNS?
+DNS converts domain names into IP addresses.
+
+Q: What is a port?
+A port identifies a specific service running on a server.
+
+Q: What is HTTP?
+HTTP is used for communication between web browsers and servers.
+
+Q: What is HTTPS?
+HTTPS is HTTP with encryption using SSL/TLS
+
+Git
+
+Q: What is Git?
+Git is a distributed version control system.
+
+Q: What is GitHub?
+GitHub is a platform to store and manage Git repositories.
+
+Q: Difference between Git Pull and Git Fetch?
+Git Pull downloads and merges changes, while Git Fetch only downloads changes.
+
+Q: What is a branch?
+A branch is an independent line of development.
+
+Docker
+
+Q: What is Docker?
+Docker is a containerization platform used to package applications and dependencies.
+
+Q: What is a container?
+A container is a lightweight isolated environment for running applications.
+
+Q: What is an image?
+A Docker image is a template used to create containers.
+
+Q: Difference between Image and Container?
+Image is a blueprint, while a container is a running instance of an image.
+
+Q: Difference between VM and Docker?
+VM runs a full OS, while Docker shares the host OS kernel.
+
+Q: What is Dockerfile?
+Dockerfile contains instructions to build a Docker image.
+
+Kubernetes
+
+Q: What is Kubernetes?
+Kubernetes is a container orchestration platform.
+
+Q: What is a Pod?
+A Pod is the smallest deployable unit in Kubernetes.
+
+Q: What is a Deployment?
+Deployment manages Pod creation and updates.
+
+Q: What is a Service?
+Service provides network access to Pods.
+
+Q: What is a Node?
+A Node is a machine that runs Kubernetes workloads.
+
+CI/CD
+
+Q: What is CI?
+Continuous Integration automatically builds and tests code changes.
+
+Q: What is CD?
+Continuous Delivery/Deployment automatically releases applications.
+
+Q: What is a pipeline?
+A pipeline automates build, test, and deployment steps.
+
+AWS
+
+Q: What is EC2?
+EC2 provides virtual servers in AWS.
+
+Q: What is S3?
+S3 is an object storage service.
+
+Q: What is IAM?
+IAM manages users, roles, and permissions in AWS.
+
+Q: What is Security Group?
+Security Group acts as a virtual firewall for EC2 instances.
+
+Q: What is Load Balancer?
+A Load Balancer distributes traffic across multiple servers.
+
+Ansible
+
+Q: What is Ansible?
+Ansible is a configuration management and automation tool.
+
+Q: What is a Playbook?
+A Playbook is a YAML file containing automation tasks.
+
+Q: What is Inventory?
+Inventory contains the list of managed servers.
+
+Terraform
+
+Q: What is Terraform?
+Terraform is an Infrastructure as Code (IaC) tool.
+
+Q: What is a Provider?
+A Provider connects Terraform with cloud services.
+
+Q: What is terraform init?
+It initializes the Terraform working directory.
+
+Q: What is terraform apply?
+It creates or updates infrastructure.
