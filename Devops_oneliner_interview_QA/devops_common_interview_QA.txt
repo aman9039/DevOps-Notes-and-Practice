@@ -1,0 +1,2 @@
+Q: Why do you want to become a DevOps Engineer?
+I enjoy working with Linux, automation, cloud technologies, and solving infrastructure problems, so I chose DevOps as my career path.

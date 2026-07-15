@@ -1,7 +1,5 @@
-Q: Why do you want to become a DevOps Engineer?
-I enjoy working with Linux, automation, cloud technologies, and solving infrastructure problems, so I chose DevOps as my career path.
-
 Linux
+======
 
 Q: What is Linux?
 Linux is an open-source operating system.
@@ -18,7 +16,29 @@ SSH is used to securely connect to a remote server.
 Q: What is the difference between cp and mv?
 cp copies files, while mv moves or renames files
 
+Q: What is a file permission?
+File permission controls who can read, write, or execute a file.
+
+Q: What is chmod used for?
+chmod is used to change file permissions.
+
+Q: What is sudo?
+sudo allows a user to execute commands with root privileges.
+
+Q: What is a shell?
+A shell is a command-line interface to interact with Linux.
+
+Q: What is grep used for?
+grep is used to search text patterns in files.
+
+Q: What is cron?
+Cron is used to schedule tasks automatically.
+
+Q: What is systemctl?
+systemctl is used to manage system services.
+
 Networking
+==========
 
 Q: What is an IP address?
 An IP address identifies a device on a network.
@@ -35,7 +55,26 @@ HTTP is used for communication between web browsers and servers.
 Q: What is HTTPS?
 HTTPS is HTTP with encryption using SSL/TLS
 
+Q: What is a subnet?
+A subnet is a smaller network inside a larger network.
+
+Q: What is a gateway?
+A gateway connects one network to another network.
+
+Q: What is NAT?
+NAT converts private IP addresses into public IP addresses.
+
+Q: What is a firewall?
+A firewall controls incoming and outgoing network traffic.
+
+Q: What is ping used for?
+Ping checks network connectivity between two devices.
+
+Q: What is traceroute?
+Traceroute shows the path packets take to reach a destination.
+
 Git
+====
 
 Q: What is Git?
 Git is a distributed version control system.
@@ -50,6 +89,7 @@ Q: What is a branch?
 A branch is an independent line of development.
 
 Docker
+======
 
 Q: What is Docker?
 Docker is a containerization platform used to package applications and dependencies.
@@ -69,7 +109,25 @@ VM runs a full OS, while Docker shares the host OS kernel.
 Q: What is Dockerfile?
 Dockerfile contains instructions to build a Docker image.
 
+ex. Dockerfile --> Docker image --> container
+
+Q: What is Docker Hub?
+Docker Hub is a repository for storing Docker images.
+
+Q: What is a volume in Docker?
+A Docker volume is used for persistent data storage.
+
+Q: What is port mapping in Docker?
+Port mapping connects a container port to a host port.
+
+Q: What is docker ps?
+docker ps shows running containers.
+
+Q: What is docker exec?
+docker exec runs commands inside a running container.
+
 Kubernetes
+==========
 
 Q: What is Kubernetes?
 Kubernetes is a container orchestration platform.
@@ -86,7 +144,26 @@ Service provides network access to Pods.
 Q: What is a Node?
 A Node is a machine that runs Kubernetes workloads.
 
+Q: What is kubelet?
+Kubelet is an agent that manages pods on a node.
+
+Q: What is kubectl?
+kubectl is the command line tool for Kubernetes management.
+
+Q: What is ReplicaSet?
+ReplicaSet ensures the desired number of pod replicas are running.
+
+Q: What is a namespace?
+Namespace is used to logically separate Kubernetes resources.
+
+Q: What is ConfigMap?
+ConfigMap stores application configuration data
+
+Q: What is Secret?
+Secret stores sensitive information such as passwords and API keys.
+
 CI/CD
+=====
 
 Q: What is CI?
 Continuous Integration automatically builds and tests code changes.
@@ -97,7 +174,20 @@ Continuous Delivery/Deployment automatically releases applications.
 Q: What is a pipeline?
 A pipeline automates build, test, and deployment steps.
 
+Q: What is a build?
+A build converts source code into an executable application.
+
+Q: What is deployment?
+Deployment is the process of releasing an application to servers.
+
+Q: What is rollback?
+Rollback means reverting to a previous stable version.
+
+Q: What is artifact?
+An artifact is the output generated after a build process.
+
 AWS
+===
 
 Q: What is EC2?
 EC2 provides virtual servers in AWS.
@@ -114,7 +204,26 @@ Security Group acts as a virtual firewall for EC2 instances.
 Q: What is Load Balancer?
 A Load Balancer distributes traffic across multiple servers.
 
+Q: What is a VPC?
+VPC is an isolated virtual network in AWS.
+
+Q: What is an AMI?
+AMI is a template used to launch EC2 instances.
+
+Q: What is EBS?
+EBS provides block storage for EC2 instances.
+
+Q: What is an Availability Zone?
+An Availability Zone is an isolated data center within a region.
+
+Q: What is an AWS Region?
+A Region is a geographical area containing multiple Availability Zones.
+
+Q: What is CloudWatch?
+CloudWatch is AWS monitoring and logging service.
+
 Ansible
+=======
 
 Q: What is Ansible?
 Ansible is a configuration management and automation tool.
@@ -125,16 +234,39 @@ A Playbook is a YAML file containing automation tasks.
 Q: What is Inventory?
 Inventory contains the list of managed servers.
 
+Q: What is an Agentless tool?
+An agentless tool works without installing software on target servers.
+
+Q: Why is Ansible called agentless?
+Because it uses SSH to connect to servers without agents.
+
+Q: What is a role in Ansible?
+A role is a reusable collection of Ansible tasks and files.
+
 Terraform
+=========
 
 Q: What is Terraform?
 Terraform is an Infrastructure as Code (IaC) tool.
 
 Q: What is a Provider?
 A Provider connects Terraform with cloud services.
+ex. Terraform ------> Provider ---> cloud service(aws & other)
 
 Q: What is terraform init?
 It initializes the Terraform working directory.
 
 Q: What is terraform apply?
 It creates or updates infrastructure.
+
+Q: What is Infrastructure as Code?
+Infrastructure as Code means managing infrastructure using code.
+
+Q: What is a state file?
+A state file stores information about managed infrastructure.
+
+Q: What is terraform plan?
+terraform plan shows changes before applying them.
+
+Q: What is terraform destroy?
+terraform destroy removes all managed resources.
