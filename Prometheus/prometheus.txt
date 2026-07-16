@@ -1,0 +1,76 @@
+Q.what is Prometheus ?
+Answer. Prometheus is a monitoring tool that collects and stores metrics from systems and applications and helps us monitor their health and performance.
+
+Q. why use Prometheus?
+Answer. We use Prometheus to know:
+
+Is the server healthy?
+Is CPU usage high?
+Is memory getting full?
+Is disk space running out?
+Is an application down?
+Is a service responding slowly?
+
+Q. When do we use Prometheus?
+Answer. Use Prometheus when you need monitoring.
+
+Typical situations:
+Linux Server Monitoring - CPU , memory, disk,Load Average
+Docker Monitoring - Container CPU usage,Container memory usage
+Kubernetes Monitoring - Pod status,Node health,Pod restarts
+Application Monitoring - Request count,Error rate,Response time
+Database Monitoring - MySQL connections,Query performance
+
+Q. Where is Prometheus used?
+Answer. Prometheus is commonly used in:
+
+Linux Administration
+DevOps
+Site Reliability Engineering (SRE)
+Cloud Infrastructure
+Kubernetes environments
+
+Common companies using Prometheus include many cloud-native organizations because it integrates well with containers and microservices.
+
+Q. Do we install Prometheus on every server?
+Answer: No. Typically, Prometheus is installed on a central monitoring server, while Node Exporter is installed on the target servers. Prometheus pulls metrics from Node Exporter using the pull model.
+
+Prometheus Server (9090)
+        |
+        +----> Server A (9100)
+        +----> Server B (9100)
+        +----> Server C (9100)
+
+Q. How does Prometheus work?
+Answer:
+Step 1
+Node Exporter runs on the server.Example:
+                                     Server
+                                        └── Node Exporter (9100)
+
+Node Exporter provides metrics:CPU usage,Memory usage,Disk usage  Network usage
+
+Step 2
+Prometheus server asks Node Exporter for metrics.
+Prometheus -----> Node Exporter
+
+This is called scraping.
+Prometheus pulls metrics every 15 seconds by default.
+
+Step 3
+Prometheus stores the metrics.
+
+Step 4
+Grafana reads the data and creates dashboards.
+Node Exporter → Prometheus → Grafana
+
+Real DevOps Architecture
+Linux Server
+     ↓
+Node Exporter (9100)
+     ↓
+Prometheus (9090)
+     ↓
+Grafana (3000)
+     ↓
+Dashboard and Alerts

@@ -3,6 +3,8 @@ Linux
 
 Q: What is Linux?
 Linux is an open-source operating system.
+or 
+Linux is an open-source and Unix-like operating system. It manages system resources such as CPU, memory, disk, and processes, and allows applications to communicate with hardware. Linux is widely used because it is stable, secure, scalable, and free to use. Most web servers, cloud platforms, and DevOps environments run on Linux.
 
 Q: What is a process?
 A process is a running instance of a program.
