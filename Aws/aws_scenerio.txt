@@ -1,4 +1,4 @@
 # Your website has only one EC2 instance,Traffic suddenly increases,Users complain the website is slow.
-  What will you do?
+What will you do?
 
-  launch multiple EC2 instance --> create an Application Load Balancer --> register all EC2 instances in a Target Group --> Load Balancer will distribute traffic equally --> If required, I will configure Auto Scaling.
+launch multiple EC2 instance --> create an Application Load Balancer --> register all EC2 instances in a Target Group --> Load Balancer will distribute traffic equally --> If required, I will configure Auto Scaling.

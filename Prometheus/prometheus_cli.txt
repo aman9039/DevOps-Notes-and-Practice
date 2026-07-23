@@ -1,0 +1,2 @@
+/usr/local/bin/node_exporter --version
+cat /etc/systemd/system/node_exporter.service

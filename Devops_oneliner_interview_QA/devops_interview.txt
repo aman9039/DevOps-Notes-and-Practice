@@ -1,0 +1,50 @@
+Docker
+
+1. Difference b/w COPY and ADD ?
+COPY only copies local files
+ADD can copy local files, download from a URL, and extract tar files automatically.
+
+2.Difference b/w CMD and ENTRYPOINT ?
+      CMD	                       ENTRYPOINT
+Sets the default command	Sets the main executable
+Can be easily overridden	Runs every time by default
+Used for default behavior	Used to make the container behave like an executable
+
+Note: 
+One-Line Revision
+FROM → Base image
+RUN → Run commands during image build
+COPY → Copy local files
+ADD → Copy files, download URLs, extract archives
+WORKDIR → Set working directory
+ENV → Set environment variables
+EXPOSE → Document container port
+CMD → Default startup command
+ENTRYPOINT → Main executable for the container
+
+3.where Docker Home directory?
+/var/lib/docker
+
+4. Write a dockerfile using linux os ?
+FROM ubuntu:22.04
+
+LABEL maintainer="Aman"
+
+ENV APP_HOME=/app
+
+WORKDIR $APP_HOME
+
+COPY . .
+
+RUN apt-get update && \
+    apt-get install -y nginx
+
+EXPOSE 80
+
+ENTRYPOINT ["nginx"]
+
+CMD ["-g", "daemon off;"]
+
+5. Why do you use daemon off;?
+It keeps Nginx running in the foreground. If Nginx runs in the background, the container will stop.
+
