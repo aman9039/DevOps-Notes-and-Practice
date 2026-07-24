@@ -1,4 +1,51 @@
-Q: What is a reverse proxy?
+Q.What is the Internet?
+Answer: The Internet is a global network of interconnected computers and devices that communicate with each other using the TCP/IP protocol.
+
+Q.What is a Network?
+Answer: A network is a group of devices connected together to share data.
+Network = Communication
+
+Q.What is an IP Address?
+Answer: IP Address is the unique address of a device in a network.
+Like every house has an address, every computer has an IP.
+IP = Identity of device
+
+Q.Public IP vs Private IP ?
+Private IP : Used inside company or home.
+192.168.x.x,10.x.x.x,172.16.x.x
+
+Public IP : Provided by ISP(Internet Service Provider).
+
+Accessible over Internet.
+Example 49.36.xx.xx
+
+Q.What is MAC Address?
+Answer: MAC Address is the physical address of Network Card.
+Example: 08:00:27:ab:cd:ef
+
+It never changes normally.
+
+Difference
+IP -> Logical  | MAC -> Physical | Linux -> ip link
+
+MAC = Hardware Identity
+
+Q. What is DNS?
+Answer: DNS converts Domain Name into IP Address.
+
+Example
+ping google.com
+
+DNS first finds IP.
+
+Linux Commands
+nslookup google.com
+dig google.com
+cat /etc/resolv.conf
+
+DNS = Phonebook of Internet
+
+Q. What is a reverse proxy?
 Answer:
 A reverse proxy is a server that sits between clients and backend servers. It receives client requests, forwards them to the appropriate backend server, and returns the response to the client. Reverse proxies are commonly used for security, SSL termination, load balancing, and hiding backend infrastructure.
 
