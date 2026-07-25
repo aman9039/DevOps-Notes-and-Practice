@@ -45,6 +45,137 @@ cat /etc/resolv.conf
 
 DNS = Phonebook of Internet
 
+Q. What is Gateway?
+Answer: Gateway connects one network to another network.
+Example
+Home Wi-Fi
+↓
+Gateway (Router)
+↓
+Internet
+
+Q. What is Subnet Mask?
+Answer: Subnet Mask tells which part is Network and which part is Host.
+Subnet = Divide Network
+
+A Subnet Mask is a 32-bit number used to identify:
+
+Network ID (which network the device belongs to)
+Host ID (which device within that network)
+
+"Which part of the IP address is the network and which part is the host."
+
+Q. What is Port?
+Answer: Port identifies a service running on a server.
+
+IP = House Address
+Port = Room Number
+
+Q. what is TCP and UDP explain ?
+Answer: 
+TCP(Transmission control protocol) = TCP is a connection-oriented and reliable protocol that guarantees data delivery in the correct order.
+
+UDP(User datagram protocol) = UDP is a connectionless protocol that is faster than TCP but does not guarantee delivery.
+
+Why is TCP slower?
+"Because TCP waits for acknowledgments, retransmits lost packets, and keeps packets in order."
+
+Why is UDP faster?
+"Because UDP sends packets without acknowledgments or retransmissions."
+
+examples of TCP --> "HTTP, HTTPS, SSH, FTP, SMTP, MySQL, PostgreSQL."
+examples of UDP --> "DNS, DHCP, VoIP, online gaming, live streaming, NTP."
+
+TCP = Telephone Call ☎️
+UDP = Radio Broadcast 📻
+
+Q. What is Ping?
+Answer: Checks whether server is reachable.
+Ping = Are you alive?
+
+Q. What is Traceroute?
+Answer: Shows complete path between source and destination.
+
+Linux
+Ex. traceroute google.com
+
+Useful for network troubleshooting.
+
+Remember
+Traceroute = Journey Map
+
+Q. What is SSH?
+Answer: SSH is used to securely connect Linux servers remotely.
+
+Q.What is Firewall?
+Answer: Firewall controls incoming and outgoing traffic.
+
+Linux command:
+firewalld
+ufw
+iptables
+
+Remember
+Firewall = Security Guard
+
+Q. What is NAT?
+Answe: NAT converts Private IP into Public IP.
+
+Example
+
+Laptop
+192.168.1.10
+↓
+Router converts
+↓
+49.xx.xx.xx
+↓
+Internet
+
+Remember
+NAT = Translator
+
+Q. What is Load Balancer?
+Answer: Distributes traffic among multiple servers.
+
+Load Balancer = Traffic Police
+
+Q. OSI Model
+Answer: All People Seem To Need Data Processing
+trick--> APS TNDP
+
+Application
+Presentation
+Session
+Transport
+Network
+Data Link
+Physical
+
+For DevOps interviews, focus on:
+
+Layer 7 → HTTP/HTTPS
+Layer 4 → TCP/UDP
+Layer 3 → IP
+Layer 2 → MAC
+Layer 1 → Cable
+
+Q. Common Networking Commands (Must Know)
+Command	        Purpose
+ip addr	        Show IP address
+hostname -I	    Show IP
+ping	        Check connectivity
+traceroute	    Show network path
+nslookup	    DNS lookup
+dig	            Detailed DNS lookup
+curl	        Test HTTP/HTTPS
+wget	        Download files
+ss -tulnp	    Show listening ports
+netstat -tulnp	Show ports (older systems)
+ip route	    Show routing table
+arp -a	        Show ARP cache
+
+
 Q. What is a reverse proxy?
 Answer:
 A reverse proxy is a server that sits between clients and backend servers. It receives client requests, forwards them to the appropriate backend server, and returns the response to the client. Reverse proxies are commonly used for security, SSL termination, load balancing, and hiding backend infrastructure.
