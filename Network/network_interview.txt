@@ -57,7 +57,10 @@ Internet
 Q. What is Subnet Mask?
 Answer: Subnet Mask tells which part is Network and which part is Host.
 Subnet = Divide Network
-
+Ex. 10.0.1.20/16
+10.0.1.0 --> network
+20 ---> host
+255.255.255.0
 A Subnet Mask is a 32-bit number used to identify:
 
 Network ID (which network the device belongs to)
@@ -119,7 +122,8 @@ Remember
 Firewall = Security Guard
 
 Q. What is NAT?
-Answe: NAT converts Private IP into Public IP.
+Answe: NAT(Network Address Translation)
+NAT converts Private IP into Public IP.
 
 Example
 

@@ -1,0 +1,22 @@
+Q. What is vpc?
+Answer: VPC stands for Virtual private cloud.
+It is private virtual network,where we create and manage aws resoureces like RDS,EC2,ECS,Load balancer etc
+
+You launch Jenkins, Docker, Kubernetes worker nodes, and databases inside one VPC.
+
+Q.What is CIDR Block?
+Answer: CIDR stands for classless inter domain routing
+CIDR is define the Ip address range of a VPC or subnet
+
+10.0.0.0/16 
+    ↓     ↓ 
+ip addr.  prefix length 
+
+total CIDR ip = 2^(32 - prefix)
+              = 2^32-16
+10.0.0.0/16 = 65536 ips
+
+Ex. magine an apartment has 100 flats.
+    CIDR decides how many flats (IP addresses) are available.
+
+CIDR = IP Range
