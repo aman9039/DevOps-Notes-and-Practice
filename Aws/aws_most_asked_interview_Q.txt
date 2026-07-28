@@ -20,3 +20,135 @@ Ex. magine an apartment has 100 flats.
     CIDR decides how many flats (IP addresses) are available.
 
 CIDR = IP Range
+
+Q. What is a Subnet?
+Answer: A subnet is a smaller network inside a VPC.
+-> This is a way to divide the VPC into smaller segments.
+-> Each subnet is small segment of your VPC where you launch aws resoureces, such as EC2,RDS etc.
+ types:
+ 1. Public subnet(EC2,NAT,Load balancer)
+ 2. private subnet(Database,Backend Server,Application Server,Database Server,ECS,EKS,Worker Nodes)
+ 3. isolated subnet(RDS, Aurora, ElastiCache)
+
+Q. What type of subnet explain?
+Answer:
+Public Subnet: Has a route to the Internet Gateway; used for internet-facing resources like Load Balancers and web servers(Reception → Anyone can enter (Web Server, Load Balancer).).
+
+Private Subnet: No direct Internet Gateway route; outbound internet access is through a NAT Gateway, making it suitable for backend servers(Office → Only employees can enter (Backend Server).).
+
+Isolated Subnet: No route to either an Internet Gateway or a NAT Gateway; used for highly secure resources such as databases(Locker Room/Vault → Only authorized internal systems can access it (Database).).
+
+Q. What is an Internet Gateway (IGW)?
+Answer: An Internet Gateway (IGW) is an AWS-managed component that connects your AWS VPC to the internet
+
+Architecture
+               Internet
+                   |
+          Internet Gateway (IGW)
+                   |
+           Public Route Table
+     0.0.0.0/0 → Internet Gateway
+                   |
+            Public Subnet
+                   |
+              EC2 Web Server
+ steps to Make an EC2 Public
+
+---> Just attaching an IGW is not enough.
+
+You need all of these:
+
+1. Create a VPC
+Example: 10.0.0.0/16
+
+2. Create an Internet Gateway
+AWS creates an IGW.
+
+3. Attach the IGW to the VPC
+VPC
+   |
+Attach
+   |
+Internet Gateway
+
+4. Create a Public Route
+
+In the route table:
+Destination : 0.0.0.0/0
+Target : Internet Gateway
+
+This means: "For any destination outside the VPC, send the traffic to the Internet Gateway."
+
+5. Enable Public IP
+While launching EC2: Auto Assign Public IP --> YES or attach an Elastic IP.
+Without a public IP, the internet doesn't know how to reach your EC2.             
+
+Q. What is a NAT Gateway?
+Answer: NAT stands for Network Address Translation
+NAT allow EC2 instances in a private subnet to access the internet for software updates,downloading packages etc without exposing them to the public internet
+
+ex. Private EC2 downloads Docker packages using NAT Gateway.
+
+NAT Gateway = Internet for Private Servers
+
+Q. Internet Gateway vs NAT Gateway ?
+Answer: 
+Internet Gateway	              NAT Gateway
+Public Subnet	                  Private Subnet
+Incoming + Outgoing	              Outgoing only
+Public IP required	              Private IP is enough
+
+Q. What is a Route Table?
+Answer: A Route Table decides where network traffic should go.
+Each subnet is associated with only one route table, and the route table decides where the network traffic should go.
+
+EX. If EC2 cannot reach the Internet,
+    the first thing to check is the Route Table.
+
+Remember
+Route Table = Google Maps of AWS
+
+Q. What is a Security Group?
+Answer: A virtual firewall that controls inbound and outbound traffic for AWS resources, such as EC2 instances.
+
+allow
+SSH(22),HTTP(80),HTTPS(443)
+Block everything else.
+
+Remember
+Security Group = Personal Security Guard
+
+Q. What is NACL (Network ACL)?
+Answer: NACL stands for Network Access Control List.
+# A Network ACL controls traffic at the subnet level.
+# It controls which inbound and outbound traffic can enter or exit the subnet.
+# Security Groups are used much more often than NACLs.
+Remember
+NACL = Security for entire subnet
+
+Q. Why use NACL?
+Answer: 
+1.Extra Security layer(subnet level)
+2.Control both allow & deny traffic
+3.Stateless firewall
+4.Protection from malicious traffic
+
+Q. Security Group vs NACL ?
+Answer: 
+Security Group	            NACL
+EC2 level	                Subnet level
+Stateful	                Stateless
+Only Allow rules	        Allow and Deny rules
+Easier to manage	        More advanced filtering
+
+# Use Security Groups for day-to-day access control.
+# Use NACLs for subnet-wide restrictions.
+
+Q. What is an Elastic IP(EIP)?
+Answer: 
+Elastic Ip is a static public ip address in AWS that you can allocate and attach to your EC2 instance,NAT Gateway or other AWS resoureces.
+# If you stop and start an EC2 instance, its public IP may change.
+  Elastic IP remains the same.
+# Elastic IP provides a permanent public ip that does not change.
+# you can detach an Elastic IP from one EC2 instance and attach it to another EC2 instance.
+
