@@ -231,3 +231,71 @@ Linux Server
 
 Remember
 SFTP = Secure File Transfer
+
+---------------------------------------------------------------------------------------------
+Q. How to setup SFTP ?
+Answer: 
+step1: Install --> sudo dnf install openssh-server -y
+       SSH --> sudo systemctl start/enable/status sshd
+
+step2: Connect using SFTP --> sftp aman@192.168.0.112
+       Download file --> get file.txt
+       Upload file --> put file.txt
+       Exit --> exit
+
+-----------------------------------------------------------------------------------------------
+Q. Lab 1: Practice SFTP on One Server
+Answer:
+step1: Install --> sudo dnf install openssh-server -y
+       SSH --> sudo systemctl start/enable/status sshd
+
+step2: Allow SSH Through Firewall
+       sudo firewall-cmd --permanent --add-service=ssh
+       sudo firewall-cmd --reload
+
+       Verify:
+       sudo firewall-cmd --list-services
+
+step3: Create a Test User --> sudo useradd devops
+       Set a password --> sudo passwd devops 
+
+step4: Create Files
+       Login as the user --> su - devops
+       Create files --> mkdir files       
+       cd files
+       echo "Hello DevOps" > file1.txt
+       echo "Linux Practice" > file2.txt
+       ls
+
+step5: Connect Using SFTP
+       From the same machine --> sftp aman@localhost
+                                 or 
+                                 sftp aman@192.168.0.112
+
+       Enter the password.       
+       You should see --> sftp>
+
+Note: Learn Basic SFTP Commands 
+ls : List files
+pwd : Remote directory
+lpwd : Local directory
+lls : Local files       
+
+step6: Download a File
+       Inside SFTP --> get file1.txt
+
+       Check your local directory --> lls
+
+       Upload a File 
+       Exit SFTP --> exit
+       Create a file --> echo "Production Build" > app.txt
+       Reconnect --> sftp aman@localhost
+
+       Upload -->  put file.txt
+       Download file --> get file.txt
+
+       Exit --> exit
+
+step7: Rename a File
+       rename file2.txt file2-v1.txt
+-----------------------------------------------------------------------------------------------
