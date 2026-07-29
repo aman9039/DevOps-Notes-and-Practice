@@ -209,3 +209,25 @@ $NF	Last column
 NR	Line number
 NF	Number of columns
 -F	Separator
+
+-----------------------------------------------------------------------------------------------------
+Q. What is SFTP?
+Answer: SFTP stands for SSH file transfer protocol
+
+SFTP (SSH File Transfer Protocol) is a secure way to transfer files between computers using SSH.
+It encrypts all data during transfer.
+Example
+Suppose you want to upload your application from your laptop to a Linux server.
+Instead of FTP, you use SFTP.
+
+Laptop
+↓
+SFTP
+↓
+Linux Server
+
+22
+(It uses SSH.)
+
+Remember
+SFTP = Secure File Transfer
