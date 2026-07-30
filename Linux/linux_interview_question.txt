@@ -298,4 +298,109 @@ step6: Download a File
 
 step7: Rename a File
        rename file2.txt file2-v1.txt
+
+Commands available inside sftp>
+Use:
+ls,pwd,cd,lcd,lls,lpwd,put,get,mkdir,rmdir,rename,rm,chmod,chown(if permitted),   
+exit,help(To see all supported commands)
 -----------------------------------------------------------------------------------------------
+Q. Lab 2: Practice with Two Linux VMs ?
+Answer:
+Server vm:
+
+step1: Install --> sudo dnf install openssh-server -y
+       SSH --> sudo systemctl start/enable/status sshd
+
+step2: Allow SSH Through Firewall
+       sudo firewall-cmd --permanent --add-service=ssh
+       sudo firewall-cmd --reload
+
+       Verify:
+       sudo firewall-cmd --list-services
+
+step3: Create a Test User --> sudo useradd devops
+       Set a password --> sudo passwd devops 
+
+step4: Create Files
+       Login as the user --> su - devops
+       Create files --> mkdir files       
+       cd files
+       echo "Hello DevOps" > file1.txt
+       echo "Linux Practice" > file2.txt
+       ls
+
+step5: Connect Using SFTP
+       From the same machine --> sftp aman@localhost
+                                 or 
+                                 sftp aman@192.168.0.112
+
+       Enter the password.       
+       You should see --> sftp>
+
+Client Vm:
+After server vm
+ 
+step1: Connect from Client VM
+Run --> sftp devops@192.168.56.102
+
+Accept the fingerprint --> yes
+nter password
+Now you should see --> sftp>
+Congratulations!
+
+You are connected.      
+
+step2: Explore Remote Files
+Remote directory --> ls,pwd,cd,mkdir
+Explore Local Files --> lls,lpwd,lcd
+
+step3:
+Download Files
+
+Download one file --> get docker.txt
+Download all --> mget *
+
+Exit --> exit
+Verify --> ls
+
+You should see the downloaded files on the client.
+
+Step4: Upload Files
+
+Create a new file on the Client VM
+
+echo "Jenkins Build" > build.txt
+
+Reconnect
+
+sftp aman@192.168.0.112
+
+Upload --> put build.txt
+Verify --> ls
+
+step5: Upload Multiple Files
+
+Client
+touch file1 file2 file3
+
+Reconnect
+mput file*
+---------------------------------------------------------------------------------------------------
+Q. Lap3 Passwordless Login in SFTP ?
+Answer: On Client VM
+
+Generate SSH key --> ssh-keygen
+Press Enter for all prompts.
+Copy the key
+ssh-copy-id aman@192.168.0.112
+
+Now test
+ssh aman@192.168.0.112
+
+Then
+sftp aman@192.168.0.112
+
+You should log in without entering a password.
+---------------------------------------------------------------------------------------------------
+Q. Can you create a file using SFTP?
+Answer: SFTP cannot run Linux commands like touch or sudo. I create the file in the local Linux shell or on the remote server using SSH, then use the put command in SFTP to upload it.
