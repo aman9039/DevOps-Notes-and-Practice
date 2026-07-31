@@ -1,0 +1,62 @@
+Q. What is Git?
+Answer: Git stands for Global Information Tracker
+VCS(Version Control System)
+SCM(Source Code Management)
+
+. Git is a distributed version control system.
+. Git is used to track the files
+. It will maintain multiple version of the same file
+. It is platform-independent
+. It is free and open-source
+. They can handle large projects efficiently
+. It is 3rd generation of VCS(Version Control System)
+. It is written on C programming
+. It come on the year 2005
+. Git give feature of rollback
+. rollback means going back to the previous version of the application
+-----------------------------------------------------------------------------------------------------
+Q. What is the Git Workflow?
+Answer:
+Working Directory 
+        |
+git add
+        ▼
+Staging Area
+        |
+git commit
+        ▼
+Local Repository
+        |
+git push
+        ▼
+GitHub
+
+WSLR
+
+. Working Directory = Where we write our source code
+  Here, Git knows the file has changed, but the changes are not saved in Git yet.
+
+. Staging Area = We track files Here
+  command : git add <file_name> or .
+
+. Local Repository = Save the staged changes permanently in Git.
+  command : git commit -m "messages"
+
+. Remote Repository (GitHub) = Where we store tracked source code
+  command : git push origin main
+
+-----------------------------------------------------------------------------------------------------
+Q. What is GitHub?
+Answer: GitHub is a cloud platform that stores Git repositories online. It helps developers collaborate, review code, and manage projects.
+
+Difference
+Git	                          GitHub
+Version control tool	      Cloud hosting platform
+Works locally	              Stores repositories online
+Installed on your computer	  Accessed through a browser
+
+Repository = A repository (repo) is a folder where Git stores your project and its history.
+
+commands:
+. git add = We track files in stageing area
+. git commit = Save the staged changes permanently in Git.
