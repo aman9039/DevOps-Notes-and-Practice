@@ -404,3 +404,7 @@ You should log in without entering a password.
 ---------------------------------------------------------------------------------------------------
 Q. Can you create a file using SFTP?
 Answer: SFTP cannot run Linux commands like touch or sudo. I create the file in the local Linux shell or on the remote server using SSH, then use the put command in SFTP to upload it.
+
+---------------------------------------------------------------------------------------------------
+Q. Restrict SFTP user to one folder explain ?
+Answer:
