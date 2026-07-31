@@ -1,2 +1,15 @@
 /usr/local/bin/node_exporter --version
 cat /etc/systemd/system/node_exporter.service
+
+# Learn PromQL
+
+Search in Prometheus.
+
+Examples:
+
+up
+node_cpu_seconds_total
+node_memory_MemAvailable_bytes
+node_filesystem_avail_bytes
+
+Spend time understanding what each metric means.
