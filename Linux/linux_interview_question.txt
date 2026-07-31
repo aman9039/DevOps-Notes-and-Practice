@@ -407,4 +407,4 @@ Answer: SFTP cannot run Linux commands like touch or sudo. I create the file in 
 
 ---------------------------------------------------------------------------------------------------
 Q. Restrict SFTP user to one folder explain ?
-Answer:
+Answer: step1 :
