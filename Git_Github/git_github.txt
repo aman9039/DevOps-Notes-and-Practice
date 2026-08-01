@@ -91,4 +91,13 @@ Developer B = Payment Feature
 Without branches, their work can interfere with each other.
 With branches, each developer works independently until the changes are merged.
 -----------------------------------------------------------------------------------------------------
-Q. 
+Q. What is stash?
+Answer: To hide the files which are not committed
+note: file need to be tracked but not committed 
+-----------------------------------------------------------------------------------------------------
+Q. What is cherry-pick ?
+Answer: We can merge only specific files from one branch to another branch with the help of commit_id
+command- git cherry-pick commit_id
+-----------------------------------------------------------------------------------------------------
+Q. What is merge ?
+Answer: 

@@ -16,4 +16,43 @@ config user and email:
 git config --global user.name "username"
 git config --global user.gmail "abc@gmail.com"
 
+branch:
+git branch = To check branches list
+git branch <branch_name> = To create a branch
+git checkout <branch_name> = To switch b/w the branches
+git branch -D <branch_name> = To delete a branch
+git checkout -b <new_branch_name> = To create and switch new_branch_name at same time
+git branch -m <branch_name> <rename_branch> or <new_branch_name> = To rename_branch
+git restore file_name = whenever you are delete file and want to restore use this command
+git reset --hard <commit-id> = to move your branch back and delete all newer work.
+stash:
+git stash = Hidden the files
+git stash push -- file_name = Hidden the file
+git stash apply = Stash apply show the file_name
+git stash list = Check stashes
+git stash show = Show a stash
+git stash show -p stash@{0} = Show full changes
+git stash apply stash@{0} = Apply a stash
+git stash pop = Apply and remove it
+git stash drop stash@{0} = Delete a stash
+
+# Hard Reset(Dangerous) = git reset --hard HEAD~1
+Everything removed.
+Commit deleted.
+Working directory cleaned.
+Cannot recover easily.
+
+# Mixed Reset (Default) = git reset HEAD~1
+Commit removed.
+Files become unstaged.
+Changes not staged
+
+# Soft Reset = git reset --soft HEAD~1
+Only removes commit.
+Files stay staged.
+A---B---C
+
+
+
+
 
