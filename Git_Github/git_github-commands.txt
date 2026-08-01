@@ -1,0 +1,19 @@
+git -v = To check version
+git init = To install .git (local repo)
+ls -al = Check hidden files
+git add <file_name> = To track file
+git status = To check status 
+git commit -m "message" = To store file
+git push origin main = To store source code on github
+git log = To show commits
+git log -2 = To show last 2 commits
+git log --oneline = TO show oneline
+git log -2 --oneline = to show commits in single line
+git show = Used to show the files which are attached to commits
+git show commit_id = To show only related commit_id
+
+config user and email:
+git config --global user.name "username"
+git config --global user.gmail "abc@gmail.com"
+
+

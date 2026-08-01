@@ -53,10 +53,42 @@ Difference
 Git	                          GitHub
 Version control tool	      Cloud hosting platform
 Works locally	              Stores repositories online
-Installed on your computer	  Accessed through a browser
+Installed on your computer    Accessed through a browser
 
 Repository = A repository (repo) is a folder where Git stores your project and its history.
 
 commands:
 . git add = We track files in stageing area
 . git commit = Save the staged changes permanently in Git.
+. git init = initialize a brand-new, empty Git repository or to convert an existing,untracked project folder into a Git repository
+-----------------------------------------------------------------------------------------------------
+Q. Difference Between git fetch and git pull ?
+Answer: git fetch = Downloads changes but does not merge them and You can review the changes.
+        git pull = Downloads changes and merges them into your current branch.
+----------------------------------------------------------------------------------------------------
+Q. Difference Between git clone and git pull ?
+Answer: git clone = Downloads the repository for the first time.
+Ex: git clone https://github.com/user/project.git
+
+git pull = Updates an existing local repository.
+-----------------------------------------------------------------------------------------------------
+Q: What is a branch?
+Answer:
+. A branch is a individaual line of development
+. Developers write the code on branches
+. Intitally branches we create on git
+. After write source code on git we push to github
+. Default branch is master
+   Development --> Git (create branch) --> Code --> GitHub
+-----------------------------------------------------------------------------------------------------
+Q. Why Use Branches?
+Answer: Suppose two developers are working.
+
+Developer A = Login Feature
+
+Developer B = Payment Feature
+
+Without branches, their work can interfere with each other.
+With branches, each developer works independently until the changes are merged.
+-----------------------------------------------------------------------------------------------------
+Q. 
