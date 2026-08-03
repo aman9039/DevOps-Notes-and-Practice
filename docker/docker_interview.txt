@@ -6,3 +6,11 @@ Docker = Application + Dependencies (Host OS kernel shared)
 
 2.Why is Docker faster than VM?
 Docker is faster because it does not need to boot a complete operating system for each container. Containers share the host OS kernel, which reduces startup time and resource usage.
+
+Why do we need a Dockerfile?
+What is the difference between a Docker image and a Docker container?
+Why do we use .dockerignore?
+What is the purpose of WORKDIR?
+Why do we use EXPOSE 5000?
+What is the difference between COPY and RUN?
+What does the . at the end of docker build -t student-backend:v1 . mean?

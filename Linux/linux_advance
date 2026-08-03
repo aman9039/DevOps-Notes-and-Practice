@@ -1,0 +1,10 @@
+Q.What does this message mean? (man-in-the-middle attack)
+WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+
+It means:
+"The server at 192.168.0.112 is presenting a different SSH identity than the one I previously trusted."
+SSH blocks the connection until you verify the change.
+
+fix:
+ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.0.112"
+This removes the old fingerprint.
