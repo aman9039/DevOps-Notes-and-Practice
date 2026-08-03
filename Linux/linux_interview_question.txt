@@ -407,4 +407,72 @@ Answer: SFTP cannot run Linux commands like touch or sudo. I create the file in 
 
 ---------------------------------------------------------------------------------------------------
 Q. Restrict SFTP user to one folder explain ?
-Answer: step1 :
+Answer: 
+step1: Install --> sudo dnf install openssh-server -y
+       SSH --> sudo systemctl start/enable/status sshd
+
+step2: Allow SSH Through Firewall
+       sudo firewall-cmd --permanent --add-service=ssh
+       sudo firewall-cmd --reload
+
+       Verify:
+       sudo firewall-cmd --list-services
+
+step3: Create Group and user
+Create a special group for SFTP users.    
+command: sudo groupadd sftpusers
+
+Verify 
+cat /etc/group
+
+Output --> sftpusers:x:1005:   
+
+Create User:
+sudo useradd -g sftpusers -s /sbin/nologin namit
+output--> namit:x:1003:1003::/home/namit:/sbin/nologin
+
+-g sftpusers	       Add user to SFTP group
+-s /sbin/nologin	Disable SSH shell
+
+Set password = sudo passwd aman
+
+Step4: Create Folder Structure
+Create folders
+sudo mkdir -p /sftp/aman/uploads
+tree /sftp
+NOTE: the -p flag stands for "parents" or "make parent directories as needed."
+
+step5: Set Ownership
+sudo chown root:root /sftp/namit
+Permissions
+sudo chmod 755 /sftp/aman
+
+Now make the upload directory writable by the user.
+sudo chown aman:sftpusers /sftp/aman/uploads
+
+Permissions
+sudo chmod 755 /sftp/aman/uploads
+
+Verify
+ls -ld /sftp/aman
+
+step6: Edit SSH Configuration
+Open
+sudo vi /etc/ssh/sshd_config
+
+Go to the end of the file.
+Add
+Match Group sftpusers
+    ChrootDirectory /sftp/%u
+    ForceCommand internal-sftp
+    PasswordAuthentication yes
+    X11Forwarding no
+    AllowTcpForwarding no
+
+Step7: Check Configuration
+
+Always test before restarting.
+
+sudo sshd -t
+
+If there is no output, the configuration is valid.
