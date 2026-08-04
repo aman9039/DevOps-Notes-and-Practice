@@ -1,0 +1,14 @@
+Q1. What is a Namespace?
+Answer: A Namespace logically separates Kubernetes resources inside the same cluster.
+
+Q2. Why use Namespaces?
+Answer: To organize applications and isolate development, testing, and production resources.
+
+Q.3 What is a Deployment?
+Answer: A Deployment manages Pods and ensures the desired number of replicas are always running.
+
+Q.4 Why use replicas?
+Answer: To provide high availability and fault tolerance.
+
+Q.5 What is a selector?
+Answer: A selector matches Pods using labels so the Deployment knows which Pods it manages.
