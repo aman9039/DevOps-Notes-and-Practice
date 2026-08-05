@@ -12,3 +12,37 @@ Answer: To provide high availability and fault tolerance.
 
 Q.5 What is a selector?
 Answer: A selector matches Pods using labels so the Deployment knows which Pods it manages.
+
+Q.6 What is a Service?
+Answer: A Service provides a stable network endpoint to access one or more Pods.
+
+Q.7 Why not use Pod IPs?
+Answer: Pod IPs are temporary and can change when Pods are recreated.
+
+Q.8 What does ClusterIP mean?
+Answer: The Service is available only inside the Kubernetes cluster
+
+Q.9 Why do we create a Service for the frontend?
+Answer: To provide a stable endpoint for accessing frontend Pods.
+
+Q.10 Can a Service create Pods?
+Answer: No. A Service only routes traffic to existing Pods.
+
+Q.11 What is an Ingress?
+Answer: An Ingress routes external HTTP/HTTPS traffic to Kubernetes Services.
+
+Q.12 Why use Ingress?
+Answer: 
+Single entry point
+Path-based routing
+Host-based routing
+TLS/HTTPS support
+
+Q.13 Does Ingress send traffic directly to Pods?
+Answer: ❌ No.
+It sends traffic to a Service, and the Service forwards it to the Pods.
+
+Q.Why do we need a Service?
+Q.What does the selector do?
+Q.What is the difference between port and targetPort?
+Q.Why is ClusterIP a good choice for a backend API?

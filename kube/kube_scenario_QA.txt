@@ -1,0 +1,30 @@
+Q.1 Problem
+Answer: Right now you have:
+
+Frontend Service (ClusterIP)
+Backend Service (ClusterIP)
+
+ClusterIP services are only accessible inside the Kubernetes cluster.
+So how does a user access the application from a browser?
+
+Answer: Through an Ingress.
+
+Q.2 Ingress yaml file work flow explain in short?
+Answer: 
+Every Ingress YAML has these 5 important parts:
+
+1. apiVersion
+2. kind: Ingress
+3. metadata
+4. spec
+5. rules
+      ├── host
+      ├── http
+            └── paths
+                 ├── path
+                 ├── pathType
+                 ├── backend
+                        └── service
+                              ├── name
+                              └── port
+                                   └── number

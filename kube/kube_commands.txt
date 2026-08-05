@@ -1,0 +1,5 @@
+kubectl apply -f namespace.yaml/backend-development.yaml
+kubectl get svc/namespace/deployment/endpoints
+kubectl describe svc/namespace/deployment/endpoints
+kubectl describe svc backend-service -n student-app
+minikube addons enable dashboard/ingress/
