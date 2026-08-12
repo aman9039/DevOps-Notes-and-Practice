@@ -1,0 +1,19 @@
+Very Important Admin Commands
+
+You should remember this group:
+
+Requirement	                        Command
+
+Kernel version	                    uname -r
+Detailed kernel info	            uname -a
+OS version	                        cat /etc/os-release
+Kernel arguments	                cat /proc/cmdline
+Loaded modules	                    lsmod
+Module information	                modinfo module_name
+Load module	                        modprobe module_name
+Remove module	                    modprobe -r module_name
+Mounted filesystems	                df -h
+Mount tree	                        findmnt
+Disk + mount points	                lsblk
+Persistent mounts	                cat /etc/fstab
+Edit file	                        vi filename / nano filename

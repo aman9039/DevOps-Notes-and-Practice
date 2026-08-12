@@ -42,6 +42,30 @@ Q.13 Does Ingress send traffic directly to Pods?
 Answer: ❌ No.
 It sends traffic to a Service, and the Service forwards it to the Pods.
 
+Q.14 Difference between configMap vs sceret ?
+Answer: 
+ConfigMap (Not Secret)
+Public configuration
+
+PORT=3000
+APP_NAME=Student-App
+LOG_LEVEL=INFO
+API_URL=https://api.example.com
+
+Note: Anyone seeing these values is usually okay.
+
+Secret
+Private information
+
+Database Password
+JWT_SECRET
+API Keys
+AWS Secret Key
+GitHub Token
+OAuth Secret
+
+These should not be exposed in source code or configuration meant for everyone.
+
 Q.Why do we need a Service?
 Q.What does the selector do?
 Q.What is the difference between port and targetPort?
