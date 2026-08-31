@@ -8,3 +8,60 @@ SSH blocks the connection until you verify the change.
 fix:
 ssh-keygen -f "/root/.ssh/known_hosts" -R "192.168.0.112"
 This removes the old fingerprint.
+---------------------------------------------------------------------------------------------------
+Q. Difference between restart and reload?
+
+Restart completely stops and starts a service, which can cause a temporary service interruption. 
+Reload only re-reads the service configuration without completely stopping the service, so existing connections are generally preserved. Not every service supports reload.
+
+Restart = Stop + Start
+Reload = Re-read configuration
+--------------------------------------------------------------------------------------------------
+✅ What is a Sticky Bit in Linux?
+
+The Sticky Bit is a special Linux permission mainly used on shared directories. It allows users to create files in the directory, but only the file owner, directory owner, or root can delete or rename those files.
+
+For /tmp --> ls -ld /tmp
+ 
+Example:
+ 
+drwxrwxrwt root root /tmp
+ 
+The t at the end indicates that the Sticky Bit is enabled.
+ 
+To set Sticky Bit --> chmod +t directory
+To remove --> chmod -t directory
+---------------------------------------------------------------------------------------------------
+✅ What is the difference between a process and a thread?
+
+A process is an independent running program with its own memory space and resources. A thread is a lightweight execution unit within a process that shares the process's memory and resources. Threads are generally faster to create and communicate with than separate processes.
+The process provides the memory/resources, while its threads perform the actual execution.
+
+To check processes --> ps -ef
+To check Thread --> ps -eLf (or) --> 'top' command, Then press H to display threads.
+---------------------------------------------------------------------------------------------------
+✅ What are the different types of processes?
+
+Linux processes can be classified as foreground, background, daemon, parent, child, orphan, and zombie processes. Foreground and background describe how a process runs, while parent/child describe the process relationship. An orphan has lost its parent, whereas a zombie has already terminated but its exit status hasn't been collected.
+
+1. Foreground Process --> The command runs interactively and occupies your terminal.
+2. Background Process -->The process runs in the background and you can continue using the terminal.
+3. Daemon Process --> Daemons normally run in the background and provide services.
+4. Zombie Process --> A zombie is a terminated process whose exit status has not yet been collected by its parent.
+5. Orphan Process --> An orphan is a child process whose parent has terminated. Linux re-parents it to an appropriate system process, commonly systemd (PID 1).
+---------------------------------------------------------------------------------------------------
+✅ How would you continuously monitor logs in Linux?
+
+ Use tail -f to continuously monitor a log file. For systemd services, use journalctl -f or journalctl -u <service> -f. This helps monitor real-time events while troubleshooting production issues.
+
+The most common cmd --> tail -f /var/log/messages
+It continuously displays new log entries as they are added to the file
+
+Monitor last 100 lines and continue watching --> tail -n 100 -f /var/log/messages
+
+Follow logs using 'less' --> less +F /var/log/messages
+Press Ctrl+C to stop following the file.
+
+On systemd-based Linux --> journalctl -u sshd -f
+
+Filter specific errors --> tail -f /var/log/messages | grep -i error
