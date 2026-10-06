@@ -183,3 +183,11 @@ chronyc tracking
 chronyc sources -v
 systemctl status chronyd
 
+
+19. Explain tar and backup ?
+sudo tar -czvf /backup/myapp/myapp-$(date +%F).tar.gz /opt/myapp /etc/myapp
+tar → archive command
+-c → create backup
+-z → compress using gzip
+-f → save to file
+-t = list/archive ke andar kya hai.

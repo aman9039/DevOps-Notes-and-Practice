@@ -1,3 +1,12 @@
+Docker: 
+Docker is a containerization platform that packages an application along with its dependencies, libraries, and configuration into a container. 
+This container can run consistently on different environments. 
+We use Docker to avoid the “works on my machine” problem. 
+It makes application deployment faster, easier, and more reliable.
+
+For example, if I have a Node.js application, I can create a Docker image containing Node.js, my application code, and required dependencies. Then I can run the same image on my laptop, testing server, or production server without manually installing everything.
+
+
 DOCKER HUB:
 Its a central platfrom used to store docker images.
 image we create on host then we will push them to dockerhub.

@@ -1,0 +1,41 @@
+Containerized Deployment with GitHub Actions | Tools: Docker, Kubernetes, GitHub Actions, Git
+
+
+First, I created a custom VPC in AWS for my application infrastructure.
+
+Then, I created a public subnet, route table, and Internet Gateway so that the resources in the subnet could communicate with the internet.
+
+After that, I created a Security Group to control the inbound and outbound traffic for the EC2 instance.
+
+Then, I launched an EC2 instance inside my VPC and used a user data script to automatically install and configure NGINX when the instance started.
+
+After that, I verified that NGINX was running properly and accessed the web server through the EC2 public IP.
+
+Separately, I also hosted a static website using Amazon S3. I created an S3 bucket, configured the required public access settings and bucket policy, and enabled versioning.
+
+I also configured IAM permissions so that resources had only the required access.
+
+Finally, I verified that the EC2 NGINX web server and the S3 static website were working properly.
+
+So, my overall AWS infrastructure flow was:
+
+VPC → Public Subnet → Route Table → Internet Gateway → Security Group → EC2 → NGINX
+
+And for static hosting:
+
+S3 Bucket → Bucket Policy → Static Website → Website Access.
+
+
+EC2 infrastructure:
+VPC → Subnet → Route Table → IGW → Security Group → EC2 → NGINX
+
+S3 hosting:
+Bucket → Policy → Versioning → Static Website
+
+## Agar interviewer bole: “How did you automate EC2 configuration?”
+
+I used an EC2 user data script for automation.
+When the EC2 instance was launched, the user data script ran automatically during the boot process.
+It installed NGINX, started the service, and configured the basic web server setup.
+So, I did not have to manually SSH into the server and install NGINX after every deployment.
+Finally, I verified the NGINX service and accessed the application through the EC2 public IP.

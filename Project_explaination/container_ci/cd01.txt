@@ -1,0 +1,24 @@
+AWS Cloud Infrastructure — EC2, VPC & S3 Web Hosting | Tools: AWS EC2, VPC, S3, IAM, Security Groups, NGINX
+
+
+First, I created a simple Node.js application and pushed the source code to GitHub.
+
+Then, I created a Dockerfile and built a Docker image for the application.
+
+After that, I created Kubernetes Deployment and Service manifests to deploy and expose the application.
+
+Then, I configured a GitHub Actions workflow for CI/CD.
+
+Whenever I pushed code to GitHub, the GitHub Actions workflow was triggered automatically.
+
+First, it checked out the code, then installed the dependencies and validated the application.
+
+After that, it built the Docker image and prepared it for deployment.
+
+Then, I deployed the application to Kubernetes. Kubernetes created the pod and ran my Node.js container inside it.
+
+Finally, I checked the pod status, service status, and application endpoint to verify that everything was working properly.
+
+So my overall flow was:
+
+Code → GitHub → GitHub Actions → Docker Image → Kubernetes → Pod → Service → Application.
